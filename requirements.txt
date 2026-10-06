@@ -5,3 +5,6 @@ pandas
 requests_cache
 retry_requests
 numpy
+dotenv
+pydantic
+aiogram
