@@ -5,7 +5,6 @@
 ![Infrastructure](https://img.shields.io/badge/IaC-Terraform-purple.svg)
 ![Configuration](https://img.shields.io/badge/CM-Ansible-red.svg)
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-green.svg)
-![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
 **Weather Outfit Telegram Bot** - це повністю автоматизований, AI-powered Телеграм-Бот, створений на базі `aiogram`. Цей бот аналізує поточний прогноз погоди (поки що тільки для Вінниці) та надає щоденні персоналізовані поради щодо вибору одягу з урахуванням температурного режиму за допомогою **Google Gemini API**.
 
