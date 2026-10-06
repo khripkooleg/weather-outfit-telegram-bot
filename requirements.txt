@@ -1,0 +1,7 @@
+google-genai
+openmeteo_requests
+ruff
+pandas
+requests_cache
+retry_requests
+numpy
