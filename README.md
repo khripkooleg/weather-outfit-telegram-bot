@@ -31,26 +31,39 @@
 ```
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml            # CI/CD Pipeline (Build, Push to ECR, Deploy to EC2)
+│       └── deploy.yml              # CI/CD автоматизація (Build, Push to ECR, SSH Deploy)
 ├── ansible/
 │   ├── aws-infra/
-│   │   ├── tasks/
-│   │   │   ├── install.yml       # Встановлення Docker, AWS CLI, залежностей
-│   │   │   ├── main.yml          # Точка входу виконання задач
-│   │   │   └── verify.yml        # Перевірка Docker та аутентифікація в ECR
-│   │   └── inventory.ini
+│   │   └── tasks/
+│   │       ├── install.yml         # Встановлення Docker, AWS CLI
+│   │       ├── main.yml            # Точка входу виконання задач
+│   │       └── verify.yml          # Перевірка Docker та ECR
 │   ├── group_vars/
-│   │   └── all.yml               # Глобальні змінні Ansible (aws_region, ecr_repo_url)
+│   │   └── all.yml                 # Глобальні змінні (aws_region, ecr_repo_url)
 │   ├── inventory/
-│   │   └── hosts.yml             # Опис хостів для Ansible
-│   ├── ansible.cfg               # Конфігурація Ansible
-│   └── playbook.yml              # Головний Playbook для налаштування сервера
-├── terraform/                    # HCL конфігурації для інфраструктури AWS (VPC, EC2, ECR)
-├── bot/                          # Вихідний код Telegram-бота
-├── docker-compose.yml            # Специфікація для запуску боту на EC2
-├── Dockerfile                    # Інструкція збірки Docker-образу
-├── requirements.txt              # Залежності Python
-└── README.md
+│   │   └── hosts.yml               # Опис IP-адреси та SSH-параметрів EC2
+│   ├── ansible.cfg                 # Основна конфігурація Ansible (шлях до inventory)
+│   └── playbook.yml                # Головний playbook
+├── src/
+│   ├── ai/                         # Модуль генерації порад через Google Gemini API
+│   ├── bot/                        # Роутери, хендлери та клавіатури aiogram
+│   ├── weather/                    # Модуль отримання прогнозу погоди
+│   ├── __init__.py
+│   ├── app.py                      # Головна точка входу (запуск бота)
+│   └── config.py                   # Зчитування конфігурації (.env / pydantic-settings)
+├── terraform/
+│   ├── .terraform.lock.hcl
+│   ├── ec2.tf
+│   ├── ecr.tf
+│   ├── iam.tf
+│   ├── main.tf
+│   ├── network.tf
+│   └── outputs.tf
+├── .gitignore                      # Ігнорування .env, terraform.tfstate, __pycache__, keys
+├── docker-compose.yml              # Специфікація запуску бота на EC2 (з прив'язкою до ECR)
+├── Dockerfile                      # Збірка образу Python
+├── README.md                       # Документація проєкту
+└── requirements.txt                # Залежності Python (aiogram, google-generativeai тощо)
 ```
 
 ---
