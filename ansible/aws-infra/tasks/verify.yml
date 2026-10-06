@@ -1,0 +1,32 @@
+---
+- name: "Verify Docker Installation"
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - docker
+    - containerd
+
+- name: "Add User to Docker Group"
+  ansible.builtin.user:
+    name: ubuntu
+    group: docker
+    append: yes
+
+- name: "Verify AWS CLI Version"
+  ansible.builtin.command: "aws --version"
+  register: aws_cli_check
+  ignore_errors: true
+  changed_when: false
+
+- name: "Display AWS CLI Version"
+  ansible.builtin.debug:
+    msg: "{{ aws_cli_check.stdout }}"
+
+- name: "Log In to AWS ECR"
+  ansible.builtin.shell: |
+    aws ecr get-login-password --region {{ aws_region }} | \
+    docker login --username AWS --password-stdin {{ ecr_repo_url }}
+  become_user: ubuntu
+  changed_when: false

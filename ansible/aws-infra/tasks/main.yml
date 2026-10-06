@@ -1,0 +1,6 @@
+---
+- name: "Provision AWS Infrastructure"
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - "install.yml"
+    - "verify.yml"
